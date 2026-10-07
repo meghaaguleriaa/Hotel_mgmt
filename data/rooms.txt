@@ -1,0 +1,2 @@
+101|Deluxe|3999|Booked
+102|Single|2999|Available

@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hotel Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>GrandStay</h2>
+                <p>Hotel Management</p>
+            </div>
+
+            <nav>
+                <button class="nav-item active" onclick="showSection('dashboard')">
+                    Dashboard
+                </button>
+
+                <button class="nav-item" onclick="showSection('customers')">
+                    Customers
+                </button>
+
+                <button class="nav-item" onclick="showSection('rooms')">
+                    Rooms
+                </button>
+
+                <button class="nav-item" onclick="showSection('bookings')">
+                    Bookings
+                </button>
+
+                <button class="nav-item" onclick="showSection('food')">
+                    Food & Services
+                </button>
+
+                <button class="nav-item" onclick="showSection('billing')">
+                    Billing
+                </button>
+
+                <button class="nav-item" onclick="showSection('employees')">
+                    Employees
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Hotel Management System</p>
+                <span>C++ Backend</span>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Header -->
+            <header class="topbar">
+
+                <div>
+                    <h1 id="page-title">Dashboard</h1>
+                    <p>Welcome to GrandStay Hotel</p>
+                </div>
+
+                <div class="admin">
+                    <div class="admin-avatar">A</div>
+
+                    <div>
+                        <strong>Admin</strong>
+                        <small>Hotel Manager</small>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- Dashboard -->
+            <section id="dashboard" class="section active-section">
+
+                <div class="welcome-card">
+                    <div>
+                        <p class="small-title">HOTEL OVERVIEW</p>
+                        <h2>Manage your hotel with ease.</h2>
+                        <p>
+                            Manage customers, rooms, bookings, food,
+                            services and billing from one place.
+                        </p>
+                        <button class="primary-btn" onclick="testCppConnection()">
+                            Test C++ Connection
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Statistics -->
+                <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div>
+                        <p>Total Customers</p>
+                        <h2 id="totalCustomers">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div>
+                        <p>Available Rooms</p>
+                        <h2 id="availableRooms">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div>
+                        <p>Active Bookings</p>
+                        <h2 id="activeBookings">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div>
+                        <p>Total Bills</p>
+                        <h2 id="totalBills">0</h2>
+                    </div>
+                </div>
+                </div>
+
+
+                <!-- Quick Actions -->
+                <div class="content-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p>Frequently used hotel operations</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+
+                        <button onclick="showSection('customers')">
+                            <strong>Add Customer</strong>
+                            <span>Register a new guest</span>
+                        </button>
+
+                        <button onclick="showSection('rooms')">
+                            <strong>Manage Rooms</strong>
+                            <span>View room availability</span>
+                        </button>
+
+                        <button onclick="showSection('bookings')">
+                            <strong>Create Booking</strong>
+                            <span>Book a room for a guest</span>
+                        </button>
+
+                        <button onclick="showSection('billing')">
+                            <strong>Generate Bill</strong>
+                            <span>View customer billing</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Customers -->
+            <section id="customers" class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Customers</h2>
+            <p>Manage hotel guests and their information.</p>
+        </div>
+
+        <button class="primary-btn" onclick="showCustomerForm()">
+            + Add Customer
+        </button>
+    </div>
+
+
+    <!-- Add Customer Form -->
+
+    <div id="customer-form" class="content-card form-card">
+
+        <h3>Add New Customer</h3>
+        <p>Enter the customer's details below.</p>
+
+        <form onsubmit="addCustomer(event)">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Customer ID</label>
+                    <input type="number" id="customerId" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="customerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="customerPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="customerEmail" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Address</label>
+                    <input type="text" id="customerAddress" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ID Proof</label>
+                    <input type="text" id="customerProof" required>
+                </div>
+
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="primary-btn">
+                    Add Customer
+                </button>
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="hideCustomerForm()">
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Customer List -->
+
+    <div class="content-card customer-list">
+
+        <div class="card-header">
+            <h3>Customer Records</h3>
+            <p>Registered hotel guests</p>
+        </div>
+
+        <div id="customerTable">
+
+            <div class="empty-state">
+                <h3>No customers added yet</h3>
+                <p>Add a customer to see their details here.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- Rooms -->
+            <section id="rooms" class="section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Rooms</h2>
+                        <p>View and manage hotel room availability.</p>
+                    </div>
+
+                    <button class="primary-btn" onclick="showRoomForm()">
+                        + Add Room
+                    </button>
+                </div>
+
+
+                <!-- Add Room Form -->
+
+                <div id="room-form" class="content-card form-card">
+
+                    <h3>Add New Room</h3>
+                    <p>Enter the room details below.</p>
+
+                    <form onsubmit="addRoom(event)">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Room Number</label>
+                                <input type="number" id="roomNumber" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Room Type</label>
+
+                                <select id="roomType" required>
+                                    <option value="">Select Room Type</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Double">Double</option>
+                                    <option value="Deluxe">Deluxe</option>
+                                    <option value="Suite">Suite</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Price per Night</label>
+                                <input type="number" id="roomPrice" required>
+                            </div>
+
+                        </div>
+
+                        <div class="form-buttons">
+
+                            <button type="submit" class="primary-btn">
+                                Add Room
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-btn"
+                                onclick="hideRoomForm()">
+                                Cancel
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- Room List -->
+
+                <div class="room-grid" id="roomList">
+
+                    <div class="room-card available">
+
+                        <span class="room-status">Available</span>
+
+                        <h3>Room 101</h3>
+
+                        <p>Single Room</p>
+
+                        <strong>₹2,500 / night</strong>
+
+                    </div>
+
+                    <div class="room-card booked">
+
+                        <span class="room-status">Booked</span>
+
+                        <h3>Room 102</h3>
+
+                        <p>Double Room</p>
+
+                        <strong>₹3,500 / night</strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Bookings -->
+            <section id="bookings" class="section">
+                <div class="section-heading">
+                    <div>
+                        <h2>Bookings</h2>
+                        <p>Manage room bookings and guest reservations.</p>
+                    </div>
+
+                    <button class="primary-btn" onclick="showBookingForm()">
+                        + Create Booking
+                    </button>
+                </div>
+
+                <div id="booking-form" class="content-card form-card">
+
+                    <h3>Create New Booking</h3>
+                    <p>Enter the booking details below.</p>
+
+                    <form onsubmit="addBooking(event)">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Booking ID</label>
+                                <input type="number" id="bookingId" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Customer ID</label>
+                                <input type="number" id="bookingCustomerId" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Room Number</label>
+                                <input type="number" id="bookingRoomNumber" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Check-in Date</label>
+                                <input type="date" id="checkInDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Number of Days</label>
+                                <input type="number" id="bookingDays" min="1" required>
+                            </div>
+
+                        </div>
+
+                        <div class="form-buttons">
+
+                            <button type="submit" class="primary-btn">
+                                Create Booking
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-btn"
+                                onclick="hideBookingForm()">
+                                Cancel
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="content-card customer-list">
+
+                    <div class="card-header">
+                        <h3>Booking Records</h3>
+                        <p>Current hotel reservations</p>
+                    </div>
+
+                    <div id="bookingList">
+
+                        <div class="empty-state">
+                            <h3>No bookings created yet</h3>
+                            <p>Create a booking to see the reservation details here.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                </section>
+
+
+
+            <!-- Food & Services -->
+            <section id="food" class="section">
+ 
+                <div class="section-heading">
+                    <div>
+                        <h2>Food & Services</h2>
+                        <p>Manage food orders and additional hotel services.</p>
+                    </div>
+                </div>
+
+                <!-- Food Order -->
+
+                <div class="content-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h3>Food Orders</h3>
+                            <p>Add food ordered by hotel customers.</p>
+                        </div>
+
+                        <button class="primary-btn" onclick="showFoodForm()">
+                            + Add Food Order
+                        </button>
+                    </div>
+
+                    <div id="food-form" class="form-card">
+
+                        <h3>Add Food Order</h3>
+
+                        <form onsubmit="addFoodOrder(event)">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Order ID</label>
+                                    <input type="number" id="foodOrderId" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer ID</label>
+                                    <input type="number" id="foodCustomerId" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Food Item</label>
+                                    <input type="text" id="foodItem" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="number" id="foodPrice" min="0" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="number" id="foodQuantity" min="1" required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-buttons">
+
+                                <button type="submit" class="primary-btn">
+                                    Add Food Order
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="secondary-btn"
+                                    onclick="hideFoodForm()">
+                                    Cancel
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div id="foodList">
+
+                        <div class="empty-state">
+                            <h3>No food orders yet</h3>
+                            <p>Food orders will appear here.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Hotel Services -->
+
+                <div class="content-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h3>Hotel Services</h3>
+                            <p>Manage additional services requested by customers.</p>
+                        </div>
+
+                        <button class="primary-btn" onclick="showServiceForm()">
+                            + Add Service
+                        </button>
+                    </div>
+
+                    <div id="service-form" class="form-card">
+
+                        <h3>Add Hotel Service</h3>
+
+                        <form onsubmit="addHotelService(event)">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Service ID</label>
+                                    <input type="number" id="serviceId" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer ID</label>
+                                    <input type="number" id="serviceCustomerId" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Service</label>
+
+                                    <select id="serviceName" required>
+                                        <option value="">Select Service</option>
+                                        <option value="Laundry">Laundry</option>
+                                        <option value="Room Cleaning">Room Cleaning</option>
+                                        <option value="Extra Bed">Extra Bed</option>
+                                        <option value="Airport Pickup">Airport Pickup</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="number" id="servicePrice" min="0" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="number" id="serviceQuantity" min="1" required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-buttons">
+
+                                <button type="submit" class="primary-btn">
+                                    Add Service
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="secondary-btn"
+                                    onclick="hideServiceForm()">
+                                    Cancel
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div id="serviceList">
+
+                        <div class="empty-state">
+                            <h3>No services added yet</h3>
+                            <p>Customer services will appear here.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                </section>
+
+      
+<section id="food-orders" class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Food Orders</h2>
+            <p>Manage food orders for hotel guests.</p>
+        </div>
+
+        <button class="primary-btn" onclick="showFoodForm()">
+            + Add Food Order
+        </button>
+    </div>
+
+
+    <div id="food-form" class="content-card form-card">
+
+        <h3>Add Food Order</h3>
+        <p>Enter the food order details.</p>
+
+        <form onsubmit="addFoodOrder(event)">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Order ID</label>
+                    <input
+                        type="number"
+                        id="foodOrderId"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Customer ID</label>
+                    <input
+                        type="number"
+                        id="foodCustomerId"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input
+                        type="number"
+                        id="foodRoomNumber"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Food Item</label>
+                    <input
+                        type="text"
+                        id="foodItem"
+                        placeholder="Example: Pizza"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input
+                        type="number"
+                        id="foodQuantity"
+                        min="1"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Price</label>
+                    <input
+                        type="number"
+                        id="foodPrice"
+                        min="0"
+                        required>
+                </div>
+
+            </div>
+
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+                    Add Order
+                </button>
+
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="hideFoodForm()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div id="foodOrderList">
+
+        <div class="content-card">
+
+            <div class="empty-state">
+
+                <h3>No food orders yet</h3>
+
+                <p>
+                    Add a food order to see it here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+           
+<section id="services" class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Services</h2>
+            <p>Manage additional services for hotel guests.</p>
+        </div>
+
+        <button class="primary-btn" onclick="showServiceForm()">
+            + Add Service
+        </button>
+    </div>
+
+
+    <div id="service-form" class="content-card form-card">
+
+        <h3>Add Service</h3>
+        <p>Enter the service details.</p>
+
+        <form onsubmit="addService(event)">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Service ID</label>
+                    <input
+                        type="number"
+                        id="serviceId"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Customer ID</label>
+                    <input
+                        type="number"
+                        id="serviceCustomerId"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input
+                        type="number"
+                        id="serviceRoomNumber"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Service Name</label>
+                    <input
+                        type="text"
+                        id="serviceName"
+                        placeholder="Example: Laundry"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input
+                        type="number"
+                        id="serviceQuantity"
+                        min="1"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Price</label>
+                    <input
+                        type="number"
+                        id="servicePrice"
+                        min="0"
+                        required>
+                </div>
+
+            </div>
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+                    Add Service
+                </button>
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="hideServiceForm()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div id="serviceList">
+
+        <div class="content-card">
+
+            <div class="empty-state">
+
+                <h3>No services added yet</h3>
+
+                <p>
+                    Add a service to see it here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- Billing -->
+            <section id="billing" class="section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Billing</h2>
+                    <p>Generate and manage customer bills.</p>
+                </div>
+
+                <button class="primary-btn" onclick="showBillForm()">
+                    + Generate Bill
+                </button>
+            </div>
+
+            <div id="bill-form" class="content-card form-card">
+
+                <h3>Generate Customer Bill</h3>
+                <p>Enter the charges to generate the final bill.</p>
+
+                <form onsubmit="generateBill(event)">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Bill ID</label>
+                            <input type="number" id="billId" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Customer ID</label>
+                            <input type="number" id="billCustomerId" required>
+                        </div>
+
+                     
+                        <div class="form-group">
+                            <label>Booking ID</label>
+                            <input type="number" id="billBookingId" required>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label>Room Charges</label>
+                            <input type="number" id="roomCharges" min="0" required>
+
+
+                         </div>
+
+                        <div class="form-group">
+                            <label>Food Charges</label>
+                            <input type="number" id="foodCharges" min="0" value="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Service Charges</label>
+                            <input type="number" id="serviceCharges" min="0" value="0" required>
+                        </div>
+
+                    </div>
+
+                    <div class="form-buttons">
+
+                        <button type="submit" class="primary-btn">
+                            Generate Bill
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            onclick="hideBillForm()">
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div id="billList">
+
+                <div class="content-card billing-card">
+
+                    <div class="empty-state">
+                        <h3>No bills generated yet</h3>
+                        <p>Generate a bill to see the final amount here.</p>
+                    </div>
+
+                </div>
+
+            </div>
+            </section>
+
+            <!-- Employees -->
+            <section id="employees" class="section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Employees</h2>
+                    <p>View hotel staff and their assigned roles.</p>
+                </div>
+            </div>
+
+            <div class="employee-grid" id="employeeList">
+
+                <div class="employee-card">
+
+                    <div class="employee-icon">
+                        M
+                    </div>
+
+                    <h3>Manager</h3>
+
+                    <p>Hotel Management</p>
+
+                    <span class="employee-status">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="employee-card">
+
+                    <div class="employee-icon">
+                        R
+                    </div>
+
+                    <h3>Receptionist</h3>
+
+                    <p>Front Desk</p>
+
+                    <span class="employee-status">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="employee-card">
+
+                    <div class="employee-icon">
+                        H
+                    </div>
+
+                    <h3>Housekeeper</h3>
+
+                    <p>Housekeeping</p>
+
+                    <span class="employee-status">
+                        Active
+                    </span>
+
+                </div>
+
+            </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
